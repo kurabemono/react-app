@@ -1,48 +1,28 @@
 import { useState } from "react";
 import { produce } from "immer";
+import ExpandableText from "./components/ExpandableText";
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [cart, setCart] = useState({
-    discount: 0.1,
-    items: [
-      { id: 1, title: "Product 1", quantity: 1 },
-      { id: 2, title: "Product 2", quantity: 1 },
-    ],
-  });
-
-  const handleClick = () => {
-    // add 1 quantity to Product 1
-
-    // using vanilla React
-    // setCart({
-    //   ...cart,
-    //   items: cart.items.map((item) =>
-    //     item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
-    //   ),
-    // });
-
-    // using immer
-    setCart(
-      produce((draft) => {
-        const item = draft.items.find((item) => item.id === 1);
-        if (item) item.quantity = item.quantity + 1;
-      })
-    );
-  };
+  const handleClick = () => {};
 
   return (
-    <>
-      <p>Cart</p>
-      <ul>
-        {cart.items.map((item) => (
-          <li key={item.id}>
-            Product: {item.title}, Qty: {item.quantity}
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleClick}>Add Item</button>
-    </>
+    <ExpandableText maxChars={30}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Purus semper eget duis
+      at tellus at urna condimentum. Tempus urna et pharetra pharetra massa
+      massa. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec.
+      Tortor consequat id porta nibh venenatis cras sed. Sed adipiscing diam
+      donec adipiscing tristique risus nec. Massa id neque aliquam vestibulum
+      morbi. Dignissim cras tincidunt lobortis feugiat vivamus at augue eget
+      arcu. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum
+      dolor. Purus viverra accumsan in nisl. Lacinia at quis risus sed. Id
+      consectetur purus ut faucibus pulvinar elementum integer enim. Sit amet
+      tellus cras adipiscing enim eu turpis egestas pretium. Velit aliquet
+      sagittis id consectetur purus ut faucibus. Habitasse platea dictumst
+      vestibulum rhoncus. Vitae congue eu consequat ac felis donec et odio
+      pellentesque. Mi eget mauris pharetra et ultrices neque.
+    </ExpandableText>
   );
 }
 
