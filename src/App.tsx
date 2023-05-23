@@ -3,31 +3,32 @@ import { produce } from "immer";
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [game, setGame] = useState({
-    id: 1,
-    player: {
-      name: "John",
-    },
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushroom"],
   });
 
   const handleClick = () => {
-    // game.player.name = "Bob";
+    // add topping to pizza
+    // pizza.toppings.push("Cheese");
 
     // using vanilla React
-    //setGame({ ...game, player: { ...game.player, name: "Bob" } });
+    // setPizza({ ...pizza, toppings: [...pizza.toppings, "Cheese"] });
 
     // using immer
-    setGame(
+    setPizza(
       produce((draft) => {
-        draft.player.name = "Bob";
+        draft.toppings.push("Cheese");
       })
     );
   };
 
   return (
     <>
-      <p key={game.player.name}>Player name: {game.player.name}</p>
-      <button onClick={handleClick}>Click me</button>
+      <p>
+        {pizza.name} Pizza topped with {pizza.toppings.join(", ")}
+      </p>
+      <button onClick={handleClick}>Add Cheese!</button>
     </>
   );
 }
