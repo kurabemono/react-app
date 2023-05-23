@@ -3,32 +3,45 @@ import { produce } from "immer";
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [pizza, setPizza] = useState({
-    name: "Spicy Pepperoni",
-    toppings: ["Mushroom"],
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "Product 1", quantity: 1 },
+      { id: 2, title: "Product 2", quantity: 1 },
+    ],
   });
 
   const handleClick = () => {
-    // add topping to pizza
-    // pizza.toppings.push("Cheese");
+    // add 1 quantity to Product 1
 
     // using vanilla React
-    // setPizza({ ...pizza, toppings: [...pizza.toppings, "Cheese"] });
+    // setCart({
+    //   ...cart,
+    //   items: cart.items.map((item) =>
+    //     item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
+    //   ),
+    // });
 
     // using immer
-    setPizza(
+    setCart(
       produce((draft) => {
-        draft.toppings.push("Cheese");
+        const item = draft.items.find((item) => item.id === 1);
+        if (item) item.quantity = item.quantity + 1;
       })
     );
   };
 
   return (
     <>
-      <p>
-        {pizza.name} Pizza topped with {pizza.toppings.join(", ")}
-      </p>
-      <button onClick={handleClick}>Add Cheese!</button>
+      <p>Cart</p>
+      <ul>
+        {cart.items.map((item) => (
+          <li key={item.id}>
+            Product: {item.title}, Qty: {item.quantity}
+          </li>
+        ))}
+      </ul>
+      <button onClick={handleClick}>Add Item</button>
     </>
   );
 }
